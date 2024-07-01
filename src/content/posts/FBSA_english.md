@@ -8,8 +8,8 @@ category: 'Computer Science and Biology'
 draft: false 
 ---
 
-## GitHub repository cards
-You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
+## Fast Bacterial Swarming Algorithm (FBSA) as a bio-inspired optimization algorithm
+En los últimos años, se han propuesto algoritmos de optimización bio-inspirados que representan un enfoque prometedor para resolver problemas de optimización complejos, no lineales y de alta dimensionalidad. 
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 

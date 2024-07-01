@@ -8,8 +8,23 @@ category: 'Computer Science and Biology'
 draft: false 
 ---
 
-## GitHub repository cards
-You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
+:::important
+Este trabajo está basado en el Proyecto Semestral realizado por mí, Paulina Martín, y Carlos Desideiro en el semestre 2024-1 (enero a junio del 2024) para la materia de Cómputo Evolutivo impartida por M. en C. Oscar Hernández Constantino.
+:::
+
+## Fast Bacterial Swarming Algorithm (FBSA) as a bio-inspired optimization algorithm
+
+En los últimos años, se han propuesto **algoritmos bio-inspirados** que representan un enfoque prometedor para resolver problemas de optimización complejos, no lineales y de alta dimensionalidad. 
+
+Un algoritmo que ha sido bastante exitoso es el **algoritmo de forrajeo bacteriano (BFA)**, que se inspira en el comportamiento de las bacterias *Escherichia coli* cuando buscan alimento en los intestinos humanos.
+
+BFA se ha aplicado a **diversos tipos de problemas de optimización** como el control adaptativo, la estimación de señales armónicas, el diseño óptimo de estabilizadores de sistemas de potencia y el flujo de potencia óptimo.
+
+No obstante, **BFA es computacionalmente costoso** y su convergencia puede mejorarse. Ying Chu et al. (2008) propusieron el **algoritmo Fast Bacterial Swarming Algorithm (FBSA)**, que integra Particle Swarming Algorithm (PSO) a BFA para solucionar estas limitaciones. 
+
+
+
+## Implementación de FBSA
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 
