@@ -8,7 +8,7 @@ category: 'Ciencias de la computación y Biología'
 draft: false 
 ---
 
-> Cover image source: [Source](https://unsplash.com/photos/a-close-up-of-a-plant-with-very-long-stems-7tgIlnxj2bM)
+> Cover image source: [Source]("cdc-7tgIlnxj2bM-unsplash.jpg")
 
 ## Fast Bacterial Swarming Algorithm (FBSA) como un algoritmo de optimización bio-inspirado
 
