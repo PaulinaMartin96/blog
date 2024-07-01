@@ -2,13 +2,13 @@
 title: Un algoritmo de optimización inspirado en bacterias
 published: 2024-05-01
 description: 'Este trabajo está basado en el proyecto semestral realizado por mí, Paulina Martín, y Carlos Desideiro en el semestre 2024-1 (enero a junio del 2024) para la materia de Cómputo Evolutivo impartida por M. en C. Oscar Hernández Constantino. Esta entrada se centra en el algoritmo de optimización inspirado en bacterias *Escherichia coli* propuesto por Ying Chu *et al.* (2008)'
-image: ''
+image: './cdc-7tgIlnxj2bM-unsplash.jpg'
 tags: [Cómputo evolutivo, algoritmos bio-inspirados, FBSA, español]
 category: 'Ciencias de la computación y Biología'
 draft: false 
 ---
 
-> Cover image source: ![alt text]("cdc-7tgIlnxj2bM-unsplash.jpg")
+> Cover image source: [Source](https://images.unsplash.com/photo-1631824683860-9a7aa1fe0713?q=80&w=3438&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 
 ## Fast Bacterial Swarming Algorithm (FBSA) como un algoritmo de optimización bio-inspirado
 
