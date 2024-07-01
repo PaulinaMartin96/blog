@@ -1,5 +1,5 @@
 ---
-title: Markdown Extended Features
+title: An optimization algorithm inspired in bateria
 published: 2024-05-01
 description: 'Read more about Markdown features in Fuwari'
 image: ''

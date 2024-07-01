@@ -1,5 +1,5 @@
 ---
-title: Markdown Extended Features
+title: Un algoritmo de optimización inspirado en bacterias
 published: 2024-05-01
 description: 'Read more about Markdown features in Fuwari'
 image: ''
