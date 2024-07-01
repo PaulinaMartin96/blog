@@ -1,18 +1,16 @@
 ---
 title: Un algoritmo de optimización inspirado en bacterias
 published: 2024-05-01
-description: 'Read more about Markdown features in Fuwari'
+description: 'Este trabajo está basado en el proyecto semestral realizado por mí, Paulina Martín, y Carlos Desideiro en el semestre 2024-1 (enero a junio del 2024) para la materia de Cómputo Evolutivo impartida por M. en C. Oscar Hernández Constantino. Esta entrada se centra en el algoritmo de optimización inspirado en bacterias *Escherichia coli* propuesto por Ying Chu *et al.* (2008)'
 image: ''
-tags: [Evolutionary Computation, Bioinspired algorithms, FBSA, english]
-category: 'Computer Science and Biology'
+tags: [Cómputo evolutivo, algoritmos bio-inspirados, FBSA, español]
+category: 'Ciencias de la computación y Biología'
 draft: false 
 ---
 
-:::important
-Este trabajo está basado en el Proyecto Semestral realizado por mí, Paulina Martín, y Carlos Desideiro en el semestre 2024-1 (enero a junio del 2024) para la materia de Cómputo Evolutivo impartida por M. en C. Oscar Hernández Constantino.
-:::
+> Cover image source: [Source](https://unsplash.com/photos/a-close-up-of-a-plant-with-very-long-stems-7tgIlnxj2bM)
 
-## Fast Bacterial Swarming Algorithm (FBSA) as a bio-inspired optimization algorithm
+## Fast Bacterial Swarming Algorithm (FBSA) como un algoritmo de optimización bio-inspirado
 
 En los últimos años, se han propuesto **algoritmos bio-inspirados** que representan un enfoque prometedor para resolver problemas de optimización complejos, no lineales y de alta dimensionalidad. 
 
@@ -20,9 +18,9 @@ Un algoritmo que ha sido bastante exitoso es el **algoritmo de forrajeo bacteria
 
 BFA se ha aplicado a **diversos tipos de problemas de optimización** como el control adaptativo, la estimación de señales armónicas, el diseño óptimo de estabilizadores de sistemas de potencia y el flujo de potencia óptimo.
 
-No obstante, **BFA es computacionalmente costoso** y su convergencia puede mejorarse. Ying Chu et al. (2008) propusieron el **algoritmo Fast Bacterial Swarming Algorithm (FBSA)**, que integra Particle Swarming Algorithm (PSO) a BFA para solucionar estas limitaciones. 
+No obstante, **BFA es computacionalmente costoso** y su convergencia puede mejorarse. Ying Chu *et al.* (2008) propusieron el **algoritmo Fast Bacterial Swarming Algorithm (FBSA)**, que integra Particle Swarming Algorithm (PSO) a BFA para solucionar estas limitaciones. 
 
-
+Por tal motivo, en este proyecto nos propusimos **implementar los algoritmos** de Bacterial Foraging Algorithm (**BFA**), Fast Bacterial Swarming Algorithm (**FBSA**), y Particle Swarming Algorithm (**PSO**), para posteriormente **evaluar y comparar su desempeño** en funciones de referencia de optimización continua.
 
 ## Implementación de FBSA
 
