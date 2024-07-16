@@ -1,7 +1,7 @@
 ---
 title: Un algoritmo de optimización inspirado en bacterias
 published: 2024-05-01
-description: 'Esta entrada está basado en el proyecto semestral realizado por mí y Carlos Desideiro para la materia de Cómputo Evolutivo (enero a junio del 2024) impartida por el profesor Oscar Hernández Constantino. Esta entrada se centra en el algoritmo de optimización inspirado en bacterias *Escherichia coli* propuesto por Ying Chu et al. (2008).'
+description: 'Esta entrada se centra en el algoritmo de optimización inspirado en bacterias *Escherichia coli* propuesto por Ying Chu et al. (2008). El contenido está basada en el proyecto semestral realizado por mí y Carlos Desideiro para la materia de Cómputo Evolutivo (enero a junio del 2024) impartida por el profesor Oscar Hernández Constantino. '
 image: './cdc-7tgIlnxj2bM-unsplash.jpg'
 tags: [Cómputo evolutivo, algoritmos bio-inspirados, FBSA, español]
 category: 'Ciencias de la computación y Biología'
@@ -18,9 +18,9 @@ Un algoritmo que ha sido bastante exitoso es el **algoritmo de forrajeo bacteria
 
 BFA se ha aplicado a **diversos tipos de problemas de optimización** como el control adaptativo, la estimación de señales armónicas, el diseño óptimo de estabilizadores de sistemas de potencia y el flujo de potencia óptimo.
 
-No obstante, **BFA es computacionalmente costoso** y su convergencia puede mejorarse. Ying Chu *et al.* (2008) propusieron el **algoritmo Fast Bacterial Swarming Algorithm (FBSA)**, que integra Particle Swarming Algorithm (PSO) a BFA para solucionar estas limitaciones. 
+No obstante, **BFA es computacionalmente costoso** y su convergencia puede mejorarse. Ying Chu *et al.* (2008) propusieron el **algoritmo Fast Bacterial Swarming Algorithm (FBSA)**, que integra Particle Swarming Algorithm (PSO) a BFA para **solucionar estas limitaciones**. 
 
-Por tal motivo, en este proyecto nos propusimos **implementar los algoritmos** de Bacterial Foraging Algorithm (**BFA**), Fast Bacterial Swarming Algorithm (**FBSA**), y Particle Swarming Algorithm (**PSO**), para posteriormente **evaluar y comparar su desempeño** en funciones de referencia de optimización continua.
+Por tal motivo, en este proyecto se tuvo por objetivo **implementar los algoritmos** de Bacterial Foraging Algorithm (**BFA**), Fast Bacterial Swarming Algorithm (**FBSA**), y Particle Swarming Algorithm (**PSO**), para posteriormente **evaluar y comparar su desempeño** en funciones de referencia de optimización continua.
 
 ## Implementación de FBSA
 
@@ -33,38 +33,166 @@ Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 
 
 ```
+### BFA
 
-### Pseudocódigo
+Las bacterias son organismos biológicos microscópicos que necesitan encontrar y aprovechar los nutrientes
+disponibles en su entorno para su supervivencia, crecimiento y reproducción. Las bacterias *E. coli*, en su proceso de forrajeo, siguen un comportamiento básico denominado quimiotaxis que les permite detectar y moverse hacia sitios ricos en nutrientes. BFA se inspira en estos procesos biológicos y plantea cuatro etapas importantes en el proceso de optimización: quimiotaxis, enjambre o *swarming*, reproducción y eliminación-dispersión.
+
+Al estar dentro del marco del Cómputo Evolutivo, el objetivo de BFA es encontrar una solución óptima para un problema de optimización específico (función objetivo) a partir de evolucionar una población de bacterias que, en cada generación, intentan aumentar su **aptitud** o **fitness**. El valor de fitness de una bacteria dependerá si la zona en la que se encuentra es rica en nutrientes o no. Por lo tanto, para cada bacteria en la población es necesario registrar su posición actual y su fitness correspondiente.
+
+
+
+#### Quimiotaxis
+
+La bacteria *E. coli* se desplaza utilizando dos maneras distintas de movimiento: **tumble** y **run**. Un **tumble** se refiere cuando la bacteria da una caminata unitaria hacia una dirección aleatoria, mientras que un **run** consiste en nado en una dirección específica. Así, un proceso de quimiotaxis para una bacteria comienza con un movimiento tipo tumble, seguido de un nado (run) en la dirección aleatoria que se definió en el tumble. 
+
+![Alt Text](https://mhrussel.wordpress.com/wp-content/uploads/2013/02/attractant-swim.gif)
+
+Inspirado en este proceso biológico, el algoritmo BFA plantea una etapa de quimiotaxis en la que la bacteria primero da un paso unitario en una dirección aleatoria $\angle \varphi$ y posteriormente realiza un nado o run en esa dirección. El número máximo de pasos que puede dar una bacteria en el nado está delimitado por el parámetro $N_s$. 
+
+La notación para representar la forma en la que se actualiza la posición de una bacteria con un movimiento tumble o run es la siguiente:
+$$
+\theta^i(j+1, k, l)=\theta^i(j, k, l)+C \times \angle \varphi
+$$
+donde $\theta^i(j, k, l)$ es la posición de la $i$-ésima bacteria de la población, en el $j$-ésimo paso de quimiotaxis, sobre el $k$-ésimo cíclo de reproducción, del $l$-ésimo evento de eliminación-dispersión,
+$C$ es el tamaño de paso al que se mueve la bacteria y $\angle \varphi$ es la dirección aleatoria que se generó sobre el espacio de búsqueda.
+
+Cada vez que la bacteria cambia de posición, es necesario actualizar su fitness. Dicho fitness resultará de aplicar la función objetivo sobre la posición de la bacteria $\theta(j, k, l)$. El fitness se denota como $J^i(j, k, l)$ y el mejor fitness en toda la población será representado por $J_{m i n}$. Una vez que la bacteria da el tumble y comienza el nado, la bacteria se moverá paso a paso, actualizando su fitness y verificando si mejora o no. Si el fitness empeora, la bacteria detiene su nado y su paso de quimiotaxis estará terminado. Si el fitness mejora, la bacteria continuará moviéndose hasta completar los $N_s$ pasos. 
+
+
+
+
+ 
 
 ```markdown
-## Algoritmo para seleccionar un individuo de una población (Roulette)
-Entrada: s  población sobre la que seleccionará un individuo (arreglo de individuos).
-Salida:  individuo seleccionado 
+## BACTERIAL FORAGING ALGORITHM (BFA)
 
-## se calcula la suma de fitness
-w = suma de los fitness de todos los individuos de la población
+# inicializar y seleccionar bacteria mejor fitness
+pop = inicializar_población_aleatoria() 
+best = mejor_bacteria_de_la_población()
 
-## inicializar el vector que guardara las probabilidades de cada individuo
-p = f_i / w, para cada individuo en la población 
+## inicializar ciclos:
+para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
+   para k = 1 hasta Nre: # ciclos de reproducción
+      para j = 1 hasta Nc: # ciclos de quimiotaxis
+         # aplicar quimiotaxis en cada bacteria de la población
+         para i = 1 hasta S:
+         
+            # quimiotaxis para la bacteria bi en pop
+            #calcular fitness y efecto combinado (J_cc)
+            Jlast = J(bi) + J_cc(bi,b)
+            
+            # movimieto tumble
+            Vd = generar_direccion_aleatoria
+            Nueva_posicion_bacteria = posición_anterior + (C * Vd)
+            
+            #swarm
+            # calcular nuevo fitness y J_cc, y asignarlo como Jcurrent
+            Jcurrent = J(bi) + J_cc(bi,b)
+            
+            # nado (run)
+            Si Jcurrent < Jlast:  # nadará más en esa dirección
+               
+               # inicia nado de la bacteria (run)
+               m=0 # contador de pasos de nado 
+               
+               mientras Jcurrent < Jlast y también m < Ns:
+                  Jlast = Jcurrent  # modificar criterio de nado
+                  Nueva_posicion_bacteria = posición_aterior + (C*Vd)
+                  
+                  #swarm
+                  # calcular nuevo fitness y J_cc de su nueva posición
+                  Jcurrent = J(bi) + J_cc(bi,b)
+                  
+            # después de que termina el nado de bi sumar salud
+            Jhealth(bi) += Jcurrent
+            
+         # termina quimiotaxis de cada bacteria bi
+        
+         # si la bacteria bi ahora es mejor que best, es la mejor encontrada
+         si Jcurrent < J(best): 
+            best = bi 
+         
+      # termina ciclo de quimiotaxis
+      
+      # reproducir bacterias con mejor salud
+      pop = reproducir(bacterias_ordenadas_por_mejor_salud) 
+      
+      # restaurar salud de las bacterias de la nueva población
+   
+   # fin de ciclo de reproducción
+   Para cada bi en pop:
+      Dispersar(bi) # con probabilidad Ped 
 
-## inicializamos el arreglo que guardara las probabilidades acumuladas
- q = suma de p[0] hasta p[i] para cada individuo s[i] en la población
- 
-## generar aleatorio (girar ruleta)
-r = aleatorio entre cero y uno
+Regresar mejor bacteria encontrada
+```
 
-## generar variables para iterar i buscar el vecino que se seleccionó con la ruleta
-índice = 0
-acumulación = p[0] (acumulación del primer individuo)
+### FBSA
 
-## proceso iterativo para buscar al individuo seleccionado 
-Mientras que acumulación sea menor que el aleatorio r:
+```markdown
+## FAST BACTERIAL SWARMING ALGORITHM
 
-     Si r es mayor que la acumulación de probabilidades:
-          índice ++  (cambiar al siguiente índice de probabilidad acumulativa)
-          acumulación = la siguiente entrada del arreglo de acumulaciones q[índice]
-          
-cuando se encuentra que la acumulación es mayor o igual se devuelve el individuo s[índice]    
+# inicializar población y seleccionar bacteria mejor fitness
+pop = inicializar_población_aleatoria() 
+best = mejor_bacteria_de_la_población()
+C = Lred
+
+## inicializar ciclos:
+para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
+   para k = 1 hasta Nre: # ciclos de reproducción
+      para j = 1 hasta Nc: # ciclos de quimiotaxis
+         # aplicar quimiotaxis en cada bacteria de la población
+         para i = 1 hasta S:
+            
+            # quimiotaxis para la bacteria bi en pop
+            #calcular fitness 
+            Jlast = J(bi) 
+            
+            # movimieto tumble
+            Vd = generar_direccion_aleatoria
+            nueva_posicion = posición_anterior + (C * Vd)
+            Jcurrent = J(nueva_posicion)
+            
+            # swarm principio de enjembre nuevo
+            #Mover la nueva posición hacia la mejor bacteria
+            nueva_posicion =  nueva_posicion + C_cc (posición anterior – mejor posición)
+            
+            # volver a calcular fitnes de la nueva posición 
+            Jcurrent = J(nueva_posicion)
+            Si Jcurrent < Jlast:  # nadará más en esa dirección
+               # inicia nado de la bacteria (run)
+               m=0 # contador de pasos de nado 
+               
+               mientras Jcurrent < Jlast y también m < Ns:
+                  Jlast = Jcurrent  # modificar criterio de nado
+                  nueva_posicion = posición_aterior + (C*Vd)
+                  # calcular nuevo fitness de su nueva posición
+                  Jcurrent = J(bi)
+               
+               # recalcular posición respecto a la mejor bacteria
+               nueva_posicion =  nueva_posicion + C_cc (posición anterior – mejor posición)
+              
+               # volver a calcular fitnes de la nueva posición 
+               Jcurrent = J(nueva_posicion)
+               
+               # después de que termina el nado sumar salud
+               Jhealth(bi) += Jcurrent
+         
+         # termina quimiotaxis de cada bacteria bi
+         best = calcular _mejor_bacteria _de_quimiotaxis()
+         # termina ciclo de quimiotaxis
+      
+      # reproducir bacterias con mejor salud
+      pop = reproducir(bacterias_ordenadas_por_mejor_salud) 
+      # restaurar salud de las bacterias de la nueva población
+      C = actualizar_Ckl() # paso adaptativo
+   
+   # fin de ciclo de reproducción
+   Para cada bi en pop:
+      Dispersar(bi) # con probabilidad Ped 
+   C = actualizar_Ckl() # paso adaptativo
+Regresar mejor bacteria encontrada
+
 ```
 
 ## Referencias
