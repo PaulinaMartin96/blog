@@ -33,18 +33,24 @@ Create a GitHub repository card with the code `::github{repo="<owner>/<repo>"}`.
 
 
 ```
-### BFA
+### 1. BFA
 
 Las bacterias son organismos biológicos microscópicos que necesitan encontrar y aprovechar los nutrientes
-disponibles en su entorno para su supervivencia, crecimiento y reproducción. Las bacterias *E. coli*, en su proceso de forrajeo, siguen un comportamiento básico denominado quimiotaxis que les permite detectar y moverse hacia sitios ricos en nutrientes. BFA se inspira en estos procesos biológicos y plantea cuatro etapas importantes en el proceso de optimización: quimiotaxis, enjambre o *swarming*, reproducción y eliminación-dispersión.
+disponibles en su entorno para su supervivencia, crecimiento y reproducción. Las bacterias *E. coli*, en su proceso de forrajeo, siguen un comportamiento básico denominado quimiotaxis que les permite detectar y moverse hacia sitios ricos en nutrientes. 
 
-Al estar dentro del marco del Cómputo Evolutivo, el objetivo de BFA es encontrar una solución óptima para un problema de optimización específico (función objetivo) a partir de evolucionar una población de bacterias que, en cada generación, intentan aumentar su **aptitud** o **fitness**. El valor de fitness de una bacteria dependerá si la zona en la que se encuentra es rica en nutrientes o no. Por lo tanto, para cada bacteria en la población es necesario registrar su posición actual y su fitness correspondiente.
+BFA se inspira en estos procesos biológicos y plantea cuatro etapas importantes en el proceso de optimización: 
+- quimiotaxis
+- enjambre o *swarming* 
+- reproducción, y
+- eliminación-dispersión.
+
+Al estar dentro del marco del Cómputo Evolutivo, el objetivo de BFA es **encontrar una solución óptima** para un problema de optimización específico (función objetivo) a partir de **evolucionar una población de bacterias** que, en cada generación, intentan **aumentar** su **aptitud** o **fitness**. El valor de fitness de una bacteria dependerá si la zona en la que se encuentra es **rica en nutrientes o no**. Por lo tanto, para cada bacteria en la población es necesario registrar su posición actual y su fitness correspondiente.
 
 
 
-#### Quimiotaxis
+#### 1.1 Quimiotaxis
 
-La bacteria *E. coli* se desplaza utilizando dos maneras distintas de movimiento: **tumble** y **run**. Un **tumble** se refiere cuando la bacteria da una caminata unitaria hacia una dirección aleatoria, mientras que un **run** consiste en nado en una dirección específica. Así, un proceso de quimiotaxis para una bacteria comienza con un movimiento tipo tumble, seguido de un nado (run) en la dirección aleatoria que se definió en el tumble. 
+La bacteria *E. coli* se desplaza utilizando dos maneras distintas de movimiento: **tumble** y **run**. Un **tumble** consiste en elegir una dirección aleatoria para moverse, mientras que un **run** consiste en nado en una dirección específica. Así, un proceso de quimiotaxis para una bacteria comienza con un movimiento tipo tumble, seguido de un nado (run) en la dirección aleatoria que se definió en el tumble. 
 
 ![Alt Text](https://mhrussel.wordpress.com/wp-content/uploads/2013/02/attractant-swim.gif)
 
@@ -72,11 +78,11 @@ pop = inicializar_población_aleatoria()
 best = mejor_bacteria_de_la_población()
 
 ## inicializar ciclos:
-para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
-   para k = 1 hasta Nre: # ciclos de reproducción
-      para j = 1 hasta Nc: # ciclos de quimiotaxis
+for l = 1 to Ned: # ciclos eliminacióm-dispersión
+   for k = 1 to Nre: # ciclos de reproducción
+      for j = 1 to Nc: # ciclos de quimiotaxis
          # aplicar quimiotaxis en cada bacteria de la población
-         para i = 1 hasta S:
+         for i = 1 to S:
          
             # quimiotaxis para la bacteria bi en pop
             #calcular fitness y efecto combinado (J_cc)
@@ -110,7 +116,7 @@ para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
          # termina quimiotaxis de cada bacteria bi
         
          # si la bacteria bi ahora es mejor que best, es la mejor encontrada
-         si Jcurrent < J(best): 
+         if Jcurrent < J(best): 
             best = bi 
          
       # termina ciclo de quimiotaxis
@@ -121,7 +127,7 @@ para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
       # restaurar salud de las bacterias de la nueva población
    
    # fin de ciclo de reproducción
-   Para cada bi en pop:
+   for bi in pop:
       Dispersar(bi) # con probabilidad Ped 
 
 Regresar mejor bacteria encontrada
@@ -138,11 +144,11 @@ best = mejor_bacteria_de_la_población()
 C = Lred
 
 ## inicializar ciclos:
-para l = 1 hasta Ned: # ciclos eliminacióm-dispersión
-   para k = 1 hasta Nre: # ciclos de reproducción
-      para j = 1 hasta Nc: # ciclos de quimiotaxis
+for l = 1 to Ned: # ciclos eliminacióm-dispersión
+   for k = 1 to Nre: # ciclos de reproducción
+      for j = 1 to Nc: # ciclos de quimiotaxis
          # aplicar quimiotaxis en cada bacteria de la población
-         para i = 1 hasta S:
+         for i = 1 to S:
             
             # quimiotaxis para la bacteria bi en pop
             #calcular fitness 
